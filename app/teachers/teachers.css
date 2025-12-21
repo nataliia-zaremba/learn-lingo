@@ -1,0 +1,361 @@
+/* Teachers Page */
+.teachers-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  background-color: #f3f4f6;
+}
+
+.teachers-page__title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.teachers-page__empty {
+  color: #6b7280;
+}
+
+.teachers-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-size: 1.125rem;
+}
+
+/* Grid - одна колонка */
+.teachers-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 1184px;
+  margin: 0 auto;
+}
+
+/* Load More */
+.teachers-page__load-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.teachers-page__load-more-btn {
+  padding: 0.75rem 1.5rem;
+  background-color: #2563eb;
+  color: white;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.teachers-page__load-more-btn:hover:not(:disabled) {
+  background-color: #1d4ed8;
+}
+
+.teachers-page__load-more-btn:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* Teacher Card */
+.teacher-card {
+  background: white;
+  border-radius: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}
+
+.teacher-card__content {
+  display: flex;
+  gap: 3rem;
+}
+
+.teacher-card__avatar-wrapper {
+  flex-shrink: 0;
+}
+
+.teacher-card__avatar {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fbbf24;
+}
+
+.teacher-card__info {
+  flex: 1;
+}
+
+/* Верхній рядок: Languages зліва, інфо справа */
+.teacher-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.teacher-card__header-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.teacher-card__label {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+}
+
+.teacher-card__name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Права частина хедера - всі іконки в ряд */
+.teacher-card__header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 0.875rem;
+}
+
+.teacher-card__info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+}
+
+.teacher-card__info-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.teacher-card__lessons-online {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.teacher-card__lessons-done {
+  color: #6b7280;
+}
+
+.teacher-card__rating {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.teacher-card__star {
+  color: #fbbf24;
+  font-size: 1rem;
+}
+
+.teacher-card__price {
+  color: #10b981;
+  font-weight: 500;
+}
+
+.teacher-card__favorite {
+  padding: 0.5rem;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #9ca3af;
+  margin-left: 0.5rem;
+}
+
+.teacher-card__favorite:hover {
+  background: #f3f4f6;
+  color: #ef4444;
+}
+
+.teacher-card__favorite--active {
+  color: #ef4444;
+  background: #fee2e2;
+}
+
+.teacher-card__favorite-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Основна інформація */
+.teacher-card__details {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.teacher-card__details > p {
+  margin-bottom: 0.5rem;
+}
+
+.teacher-card__label-inline {
+  color: #6b7280;
+}
+
+.teacher-card__value {
+  font-weight: 500;
+  color: #111827;
+}
+
+/* Бейджі рівнів - перед Read more */
+.teacher-card__levels-preview {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.teacher-card__levels-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.teacher-card__level-badge {
+  padding: 0.5rem 0.75rem;
+  background-color: #fef3c7;
+  color: #92400e;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.teacher-card__read-more {
+  margin-top: 0.5rem;
+  color: #2563eb;
+  font-weight: 500;
+  font-size: 0.875rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.teacher-card__read-more:hover {
+  color: #1d4ed8;
+}
+
+/* Expanded Content */
+.teacher-card__expanded {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.teacher-card__experience {
+  font-size: 0.875rem;
+  color: #374151;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+/* Reviews */
+.teacher-card__reviews {
+  margin-bottom: 1rem;
+}
+
+.teacher-card__reviews-list {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.teacher-card__review {
+  background: transparent;
+  padding: 0;
+}
+
+.teacher-card__review-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.teacher-card__reviewer-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: #d1d5db;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.teacher-card__reviewer-info {
+  flex: 1;
+}
+
+.teacher-card__reviewer-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.teacher-card__review-rating {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  gap: 0.25rem;
+  color: #111827;
+}
+
+.teacher-card__review-rating .teacher-card__star {
+  font-size: 0.875rem;
+}
+
+.teacher-card__review-comment {
+  font-size: 0.875rem;
+  color: #111827;
+  line-height: 1.6;
+}
+
+/* Book trial lesson button */
+.teacher-card__book-btn {
+  margin-top: 2rem;
+  width: auto;
+  background-color: #fbbf24;
+  color: #111827;
+  font-weight: 600;
+  padding: 1rem 3rem;
+  border-radius: 0.75rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 1rem;
+}
+
+.teacher-card__book-btn:hover {
+  background-color: #f59e0b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .teacher-card__content {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .teacher-card__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .teacher-card__header-right {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}

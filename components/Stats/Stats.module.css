@@ -1,0 +1,44 @@
+.stats {
+  margin-top: 24px;
+  padding: 64px 0;
+
+  border: 1.5px dashed #f4c550;
+  border-radius: 30px;
+
+  height: 116px;
+}
+
+.list {
+  width: 100%;
+  padding-inline: 64px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* число */
+.value {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 1.14;
+  color: #121417;
+  white-space: nowrap;
+}
+
+/* текст справа, стопчиком */
+.label {
+  display: flex;
+  flex-direction: column;
+
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.02em;
+  color: rgba(18, 20, 23, 0.7);
+}

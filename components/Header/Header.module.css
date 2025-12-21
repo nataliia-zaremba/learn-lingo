@@ -1,0 +1,154 @@
+.header {
+  padding: 20px 0;
+}
+
+/* 🔥 ОДИНАКОВИЙ container ДЛЯ Header / Hero / Stats */
+.container {
+  max-width: 1312px;
+  margin: 0 auto;
+  padding-inline: 64px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ---------- LOGO ---------- */
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-weight: 700;
+  font-size: 20px;
+  color: #121417;
+}
+
+/* ---------- NAV ---------- */
+
+.nav {
+  display: flex;
+  gap: 28px;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.nav a {
+  color: #121417;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav a:hover {
+  color: #fbbf24;
+}
+
+/* ---------- ACTIONS ---------- */
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.login {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 8px; /* відступ між іконкою та текстом */
+
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  color: #121417;
+  transition: color 0.2s;
+}
+
+.login:hover {
+  color: #fbbf24;
+}
+
+.register {
+  height: 48px;
+  padding: 0 39px;
+  border-radius: 12px;
+  border: none;
+
+  background: #121417;
+  color: #fff;
+
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.register:hover {
+  background: #2d3035;
+}
+
+/* ---------- USER INFO ---------- */
+
+.userName {
+  font-size: 16px;
+  font-weight: 500;
+  color: #121417;
+  padding: 0 0.5rem;
+}
+
+.logout {
+  height: 48px;
+  padding: 0 39px;
+  border-radius: 12px;
+  border: none;
+
+  background: #fbbf24;
+  color: #121417;
+
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.logout:hover {
+  background: #f59e0b;
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 768px) {
+  .container {
+    padding-inline: 20px;
+  }
+
+  .nav {
+    gap: 16px;
+    font-size: 14px;
+  }
+
+  .actions {
+    gap: 8px;
+  }
+
+  .login,
+  .register,
+  .logout {
+    font-size: 14px;
+    padding: 0 20px;
+    height: 40px;
+  }
+
+  .userName {
+    display: none;
+  }
+}
