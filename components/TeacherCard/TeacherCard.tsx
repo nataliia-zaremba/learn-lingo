@@ -150,30 +150,31 @@ export default function TeacherCard({
               <p className="teacher-card__experience">{teacher.experience}</p>
 
               {/* Reviews */}
-              {teacher.reviews && teacher.reviews.length > 0 && (
+              {Array.isArray(teacher.reviews) && teacher.reviews.length > 0 && (
                 <div className="teacher-card__reviews">
                   <div className="teacher-card__reviews-list">
-                    {teacher.reviews.map((review, idx) => (
-                      <div key={idx} className="teacher-card__review">
-                        <div className="teacher-card__review-header">
-                          <div className="teacher-card__reviewer-avatar">
-                            {review.reviewer_name?.[0]}
-                          </div>
-                          <div className="teacher-card__reviewer-info">
-                            <p className="teacher-card__reviewer-name">
-                              {review.reviewer_name}
-                            </p>
-                            <div className="teacher-card__review-rating">
-                              <span className="teacher-card__star">⭐</span>
-                              <span>{review.reviewer_rating}.0</span>
+                    {Array.isArray(teacher.reviews) &&
+                      teacher.reviews.map((review, idx) => (
+                        <div key={idx} className="teacher-card__review">
+                          <div className="teacher-card__review-header">
+                            <div className="teacher-card__reviewer-avatar">
+                              {review.reviewer_name?.[0]}
+                            </div>
+                            <div className="teacher-card__reviewer-info">
+                              <p className="teacher-card__reviewer-name">
+                                {review.reviewer_name}
+                              </p>
+                              <div className="teacher-card__review-rating">
+                                <span className="teacher-card__star">⭐</span>
+                                <span>{review.reviewer_rating}.0</span>
+                              </div>
                             </div>
                           </div>
+                          <p className="teacher-card__review-comment">
+                            {review.comment}
+                          </p>
                         </div>
-                        <p className="teacher-card__review-comment">
-                          {review.comment}
-                        </p>
-                      </div>
-                    ))}
+                      ))}
                   </div>
                 </div>
               )}
