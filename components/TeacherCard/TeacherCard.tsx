@@ -117,7 +117,9 @@ export default function TeacherCard({
             </p>
             <p>
               <span className="teacher-card__label-inline">Conditions:</span>{" "}
-              {teacher.conditions?.join(" ") || "N/A"}
+              {Array.isArray(teacher.conditions)
+                ? teacher.conditions.join(" ")
+                : teacher.conditions || "N/A"}
             </p>
           </div>
 
