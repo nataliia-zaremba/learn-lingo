@@ -2,28 +2,39 @@
 
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "next/navigation";
 import { getTeachers } from "@/lib/teachersApi";
 import { Teacher } from "@/types/teacher";
 import TeacherCard from "@/components/TeacherCard/TeacherCard";
 import Modal from "@/components/Modal/Modal";
 import BookingForm from "@/components/BookingForm/BookingForm";
-import "./teachers.css";
+import "../teachers/teachers.css";
 
-export default function TeachersPage() {
-  const { user } = useAuth();
-  const [teachers, setTeachers] = useState<(Teacher & { id: string })[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [loadingMore, setLoadingMore] = useState(false);
-  const [currentLimit, setCurrentLimit] = useState(4);
-  const [hasMore, setHasMore] = useState(true);
+export default function FavoritesPage() {
+  const { user, loading: authLoading } = useAuth();
+  const router = useRouter();
+  const [allTeachers, setAllTeachers] = useState<(Teacher & { id: string })[]>(
+    []
+  );
+  const [favoriteTeachers, setFavoriteTeachers] = useState<
+    (Teacher & { id: string })[]
+  >([]);
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
+  const [loading, setLoading] = useState(true);
 
   // Booking modal state
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [selectedTeacher, setSelectedTeacher] = useState<
     (Teacher & { id: string }) | null
   >(null);
+
+  // Перевірка авторизації
+  useEffect(() => {
+    if (!authLoading && !user) {
+      router.push("/");
+    }
+  }, [user, authLoading, router]);
 
   // Завантаження favorites з localStorage
   useEffect(() => {
@@ -33,6 +44,31 @@ export default function TeachersPage() {
     }
   }, []);
 
+  // Завантаження всіх викладачів
+  useEffect(() => {
+    const loadTeachers = async () => {
+      try {
+        // Завантажуємо всіх викладачів (великий limit)
+        const data = await getTeachers(100);
+        setAllTeachers(data);
+      } catch (error) {
+        console.error("Error loading teachers:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (user) {
+      loadTeachers();
+    }
+  }, [user]);
+
+  // Фільтруємо викладачів за favorites
+  useEffect(() => {
+    const filtered = allTeachers.filter((teacher) => favorites.has(teacher.id));
+    setFavoriteTeachers(filtered);
+  }, [allTeachers, favorites]);
+
   // Збереження favorites в localStorage
   useEffect(() => {
     if (favorites.size > 0) {
@@ -40,40 +76,12 @@ export default function TeachersPage() {
         "favoriteTeachers",
         JSON.stringify(Array.from(favorites))
       );
+    } else {
+      localStorage.removeItem("favoriteTeachers");
     }
   }, [favorites]);
 
-  // Початкове завантаження викладачів
-  useEffect(() => {
-    loadTeachers(4);
-  }, []);
-
-  const loadTeachers = async (limit: number) => {
-    try {
-      const data = await getTeachers(limit);
-      setTeachers(data);
-      setHasMore(data.length === limit);
-    } catch (error) {
-      console.error("Error loading teachers:", error);
-    } finally {
-      setLoading(false);
-      setLoadingMore(false);
-    }
-  };
-
-  const handleLoadMore = async () => {
-    setLoadingMore(true);
-    const newLimit = currentLimit + 4;
-    setCurrentLimit(newLimit);
-    await loadTeachers(newLimit);
-  };
-
   const handleFavoriteToggle = (teacherId: string) => {
-    if (!user) {
-      alert("Щоб додати викладача в обрані, потрібно увійти в систему!");
-      return;
-    }
-
     setFavorites((prev) => {
       const newFavorites = new Set(prev);
       if (newFavorites.has(teacherId)) {
@@ -107,25 +115,41 @@ export default function TeachersPage() {
     setSelectedTeacher(null);
   };
 
-  if (loading) {
+  // Показуємо loader поки перевіряємо авторизацію
+  if (authLoading || (loading && user)) {
     return (
       <div className="teachers-loading">
-        <p>Loading teachers...</p>
+        <p>Loading...</p>
       </div>
     );
+  }
+
+  // Якщо не авторизований, не показуємо нічого (редірект вже відбувається)
+  if (!user) {
+    return null;
   }
 
   return (
     <>
       <section className="teachers-page">
-        <h1 className="teachers-page__title">Our Teachers</h1>
+        <h1 className="teachers-page__title">Favorite Teachers</h1>
 
-        {teachers.length === 0 && (
-          <p className="teachers-page__empty">No teachers found</p>
+        {favoriteTeachers.length === 0 && (
+          <div className="teachers-page__empty-state">
+            <p className="teachers-page__empty">
+              You haven't added any teachers to favorites yet.
+            </p>
+            <button
+              onClick={() => router.push("/teachers")}
+              className="teachers-page__browse-btn"
+            >
+              Browse Teachers
+            </button>
+          </div>
         )}
 
         <div className="teachers-grid">
-          {teachers.map((teacher) => (
+          {favoriteTeachers.map((teacher) => (
             <TeacherCard
               key={teacher.id}
               teacher={teacher}
@@ -137,18 +161,6 @@ export default function TeachersPage() {
             />
           ))}
         </div>
-
-        {hasMore && teachers.length >= 4 && (
-          <div className="teachers-page__load-more">
-            <button
-              onClick={handleLoadMore}
-              disabled={loadingMore}
-              className="teachers-page__load-more-btn"
-            >
-              {loadingMore ? "Loading..." : "Load more"}
-            </button>
-          </div>
-        )}
       </section>
 
       {/* Booking Modal */}

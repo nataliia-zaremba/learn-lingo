@@ -1,0 +1,242 @@
+/* Booking Form Wrapper */
+.booking-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.booking-description {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgba(18, 20, 23, 0.8);
+}
+
+/* Teacher Info */
+.booking-teacher {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 1rem 0;
+}
+
+.booking-teacher-avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.booking-teacher-label {
+  font-size: 0.75rem;
+  color: #8a8a89;
+  margin-bottom: 0.25rem;
+}
+
+.booking-teacher-name {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #121417;
+}
+
+/* Form */
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+}
+
+.booking-label {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #121417;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* Radio Group */
+.booking-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.booking-radio-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: #121417;
+  cursor: pointer;
+  user-select: none;
+}
+
+.booking-radio-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.booking-radio-custom {
+  position: relative;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid rgba(18, 20, 23, 0.2);
+  border-radius: 50%;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.booking-radio-custom::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  background-color: #fbbf24;
+  transition: transform 0.2s;
+}
+
+.booking-radio-input:checked + .booking-radio-custom {
+  border-color: #fbbf24;
+}
+
+.booking-radio-input:checked + .booking-radio-custom::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.booking-radio-label:hover .booking-radio-custom {
+  border-color: #fbbf24;
+}
+
+/* Form Inputs */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid rgba(18, 20, 23, 0.1);
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #111827;
+  transition: all 0.2s;
+  outline: none;
+}
+
+.form-input::placeholder {
+  color: rgba(18, 20, 23, 0.5);
+}
+
+.form-input:focus {
+  border-color: #fbbf24;
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.1);
+}
+
+.form-input--error {
+  border-color: #dc2626;
+}
+
+.form-input--error:focus {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.form-error {
+  font-size: 0.875rem;
+  color: #dc2626;
+  margin-top: 0.25rem;
+}
+
+/* Submit Button */
+.booking-submit-btn {
+  width: 100%;
+  padding: 1rem;
+  background-color: #fbbf24;
+  color: #111827;
+  font-size: 1.125rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 0.5rem;
+}
+
+.booking-submit-btn:hover:not(:disabled) {
+  background-color: #f59e0b;
+}
+
+.booking-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Success Message */
+.booking-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.booking-success-icon {
+  width: 4rem;
+  height: 4rem;
+  background-color: #10b981;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  animation: scaleIn 0.3s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.booking-success h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #121417;
+  margin-bottom: 0.5rem;
+}
+
+.booking-success p {
+  font-size: 1rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .booking-label {
+    font-size: 1.125rem;
+  }
+
+  .form-input {
+    padding: 0.875rem;
+    font-size: 0.9375rem;
+  }
+
+  .booking-submit-btn {
+    font-size: 1rem;
+  }
+}
