@@ -33,7 +33,6 @@ export default function TeacherCard({
 
         {/* Main Info */}
         <div className="teacher-card__info">
-          {/* Header: Languages зліва, всі іконки справа */}
           <div className="teacher-card__header">
             <div className="teacher-card__header-left">
               <p className="teacher-card__label">Languages</p>
@@ -108,7 +107,9 @@ export default function TeacherCard({
             <p>
               <span className="teacher-card__label-inline">Speaks:</span>{" "}
               <span className="teacher-card__value">
-                {teacher.languages?.join(", ") || "N/A"}
+                {Array.isArray(teacher.languages)
+                  ? teacher.languages.join(", ")
+                  : "N/A"}
               </span>
             </p>
             <p>
@@ -124,7 +125,7 @@ export default function TeacherCard({
           </div>
 
           {/* Levels Preview - показуємо завжди */}
-          {teacher.levels && teacher.levels.length > 0 && (
+          {Array.isArray(teacher.levels) && teacher.levels.length > 0 && (
             <div className="teacher-card__levels-preview">
               <div className="teacher-card__levels-list">
                 {teacher.levels.map((level, idx) => (
@@ -153,28 +154,27 @@ export default function TeacherCard({
               {Array.isArray(teacher.reviews) && teacher.reviews.length > 0 && (
                 <div className="teacher-card__reviews">
                   <div className="teacher-card__reviews-list">
-                    {Array.isArray(teacher.reviews) &&
-                      teacher.reviews.map((review, idx) => (
-                        <div key={idx} className="teacher-card__review">
-                          <div className="teacher-card__review-header">
-                            <div className="teacher-card__reviewer-avatar">
-                              {review.reviewer_name?.[0]}
-                            </div>
-                            <div className="teacher-card__reviewer-info">
-                              <p className="teacher-card__reviewer-name">
-                                {review.reviewer_name}
-                              </p>
-                              <div className="teacher-card__review-rating">
-                                <span className="teacher-card__star">⭐</span>
-                                <span>{review.reviewer_rating}.0</span>
-                              </div>
+                    {teacher.reviews.map((review, idx) => (
+                      <div key={idx} className="teacher-card__review">
+                        <div className="teacher-card__review-header">
+                          <div className="teacher-card__reviewer-avatar">
+                            {review.reviewer_name?.[0]}
+                          </div>
+                          <div className="teacher-card__reviewer-info">
+                            <p className="teacher-card__reviewer-name">
+                              {review.reviewer_name}
+                            </p>
+                            <div className="teacher-card__review-rating">
+                              <span className="teacher-card__star">⭐</span>
+                              <span>{review.reviewer_rating}.0</span>
                             </div>
                           </div>
-                          <p className="teacher-card__review-comment">
-                            {review.comment}
-                          </p>
                         </div>
-                      ))}
+                        <p className="teacher-card__review-comment">
+                          {review.comment}
+                        </p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}
