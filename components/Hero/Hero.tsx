@@ -1,6 +1,11 @@
+"use client";
+
+import { useRouter } from "next/navigation";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
+  const router = useRouter();
+
   return (
     <section className="container">
       <div className={styles.hero}>
@@ -15,7 +20,12 @@ export default function Hero() {
             highly qualified and experienced tutors.
           </p>
 
-          <button className={styles.button}>Get started</button>
+          <button
+            className={styles.button}
+            onClick={() => router.push("/teachers")}
+          >
+            Get started
+          </button>
         </div>
 
         <div className={styles.imageWrapper}>
