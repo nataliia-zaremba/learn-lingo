@@ -7,6 +7,7 @@ import { Teacher } from "@/types/teacher";
 import TeacherCard from "@/components/TeacherCard/TeacherCard";
 import Modal from "@/components/Modal/Modal";
 import BookingForm from "@/components/BookingForm/BookingForm";
+import Toast from "@/components/Toast/Toast";
 import "./teachers.css";
 
 export default function TeachersPage() {
@@ -18,6 +19,10 @@ export default function TeachersPage() {
   const [hasMore, setHasMore] = useState(true);
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
+
+  // Toast state
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
 
   // Booking modal state
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
@@ -70,7 +75,10 @@ export default function TeachersPage() {
 
   const handleFavoriteToggle = (teacherId: string) => {
     if (!user) {
-      alert("Щоб додати викладача в обрані, потрібно увійти в систему!");
+      setToastMessage(
+        "Щоб додати викладача в обрані, потрібно увійти в систему!"
+      );
+      setShowToast(true);
       return;
     }
 
@@ -150,6 +158,15 @@ export default function TeachersPage() {
           </div>
         )}
       </section>
+
+      {/* Toast Notification */}
+      {showToast && (
+        <Toast
+          message={toastMessage}
+          type="warning"
+          onClose={() => setShowToast(false)}
+        />
+      )}
 
       {/* Booking Modal */}
       {selectedTeacher && (
